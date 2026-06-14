@@ -82,14 +82,18 @@ app.post("/generar-pdf", async (req, res) => {
     }
 
     const finalPdf = await mergedPdf.save();
-    const buffer   = Buffer.from(finalPdf);
+const buffer   = Buffer.from(finalPdf);
 
-    // ✅ attachment → fuerza descarga en móvil y PC
-    const fecha = new Date().toLocaleDateString("es-CO").replace(/\//g, "-");
-    res.setHeader("Content-Type", "application/pdf");
-    res.setHeader("Content-Disposition", `attachment; filename="planillas_${fecha}.pdf"`);
-    res.setHeader("Content-Length", buffer.length);
-    res.end(buffer);
+const fecha = new Date().toLocaleDateString("es-CO").replace(/\//g, "-");
+res.set({
+  "Content-Type": "application/pdf",
+  "Content-Disposition": `attachment; filename="planillas_${fecha}.pdf"`,
+  "Content-Length": buffer.length,
+  "Cache-Control": "no-cache, no-store, must-revalidate",
+  "Pragma": "no-cache",
+  "Expires": "0"
+});
+res.send(buffer);
 
   } catch (error) {
     console.error(error);
