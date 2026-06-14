@@ -21,7 +21,6 @@ app.post("/generar-pdf", async (req, res) => {
     const plantillaBytes = fs.readFileSync(pdfPath);
 
     const mergedPdf = await PDFDocument.create();
-    const font = await mergedPdf.embedFont(StandardFonts.Helvetica);
 
     const formatFecha = (f) => {
       if (!f) return "";
@@ -38,42 +37,42 @@ app.post("/generar-pdf", async (req, res) => {
       const page = pdfDoc.getPages()[0];
 
       // ── IDA ──
-      page.drawText(formatFecha(data.fecha) || '', { x: 99,  y: 695, size: 10, font });
-      page.drawText(data.nombreUsuario     || '', { x: 94,  y: 653, size: 10, font });
-      page.drawText(data.nroDoc            || '', { x: 415, y: 640, size: 10, font });
-      page.drawText(data.eps               || '', { x: 94,  y: 627, size: 10, font });
-      page.drawText(data.docOrigen         || '', { x: 60,  y: 565, size: 10, font });
-      page.drawText(data.origenCiudad      || '', { x: 235, y: 565, size: 10, font });
-      page.drawText(data.origenHora        || '', { x: 522, y: 560, size: 10, font });
-      page.drawText(data.docDestino        || '', { x: 60,  y: 520, size: 10, font });
-      page.drawText(data.destinoCiudad     || '', { x: 235, y: 520, size: 10, font });
-      page.drawText(data.destinoHora       || '', { x: 522, y: 515, size: 10, font });
+      page.drawText(formatFecha(data.fecha) || '', { x: 99,  y: 695, size: 10 });
+      page.drawText(data.nombreUsuario     || '', { x: 94,  y: 653, size: 10 });
+      page.drawText(data.nroDoc            || '', { x: 415, y: 640, size: 10 });
+      page.drawText(data.eps               || '', { x: 94,  y: 627, size: 10 });
+      page.drawText(data.docOrigen         || '', { x: 60,  y: 565, size: 10 });
+      page.drawText(data.origenCiudad      || '', { x: 235, y: 565, size: 10 });
+      page.drawText(data.origenHora        || '', { x: 522, y: 560, size: 10 });
+      page.drawText(data.docDestino        || '', { x: 60,  y: 520, size: 10 });
+      page.drawText(data.destinoCiudad     || '', { x: 235, y: 520, size: 10 });
+      page.drawText(data.destinoHora       || '', { x: 522, y: 515, size: 10 });
 
       // ── REGRESO ──
-      page.drawText(formatFecha(data.fecha) || '', { x: 99,  y: 323, size: 10, font });
-      page.drawText(data.nombreUsuario     || '', { x: 94,  y: 281, size: 10, font });
-      page.drawText(data.nroDoc            || '', { x: 415, y: 268, size: 10, font });
-      page.drawText(data.eps               || '', { x: 94,  y: 255, size: 10, font });
-      page.drawText(data.docDestino        || '', { x: 60,  y: 192, size: 10, font });
-      page.drawText(data.destinoCiudad     || '', { x: 235, y: 192, size: 10, font });
-      page.drawText(data.horaVueltaSalida  || '', { x: 522, y: 188, size: 10, font });
-      page.drawText(data.docOrigen         || '', { x: 60,  y: 148, size: 10, font });
-      page.drawText(data.origenCiudad      || '', { x: 235, y: 148, size: 10, font });
-      page.drawText(data.horaVueltaLlegada || '', { x: 522, y: 143, size: 10, font });
+      page.drawText(formatFecha(data.fecha) || '', { x: 99,  y: 323, size: 10 });
+      page.drawText(data.nombreUsuario     || '', { x: 94,  y: 281, size: 10 });
+      page.drawText(data.nroDoc            || '', { x: 415, y: 268, size: 10 });
+      page.drawText(data.eps               || '', { x: 94,  y: 255, size: 10 });
+      page.drawText(data.docDestino        || '', { x: 60,  y: 192, size: 10 });
+      page.drawText(data.destinoCiudad     || '', { x: 235, y: 192, size: 10 });
+      page.drawText(data.horaVueltaSalida  || '', { x: 522, y: 188, size: 10 });
+      page.drawText(data.docOrigen         || '', { x: 60,  y: 148, size: 10 });
+      page.drawText(data.origenCiudad      || '', { x: 235, y: 148, size: 10 });
+      page.drawText(data.horaVueltaLlegada || '', { x: 522, y: 143, size: 10 });
 
       // ── TIPO DOC IDA ──
       const yDoc = 639;
-      if (data.tipoDoc === "CC")   page.drawText("X", { x: 103, y: yDoc,  size: 14, font });
-      if (data.tipoDoc === "TI")   page.drawText("X", { x: 141, y: yDoc,  size: 14, font });
-      if (data.tipoDoc === "RC")   page.drawText("X", { x: 186, y: yDoc,  size: 14, font });
-      if (data.tipoDoc === "OTRO") page.drawText("X", { x: 290, y: yDoc,  size: 14, font });
+      if (data.tipoDoc === "CC")   page.drawText("X", { x: 103, y: yDoc,  size: 14 });
+      if (data.tipoDoc === "TI")   page.drawText("X", { x: 141, y: yDoc,  size: 14 });
+      if (data.tipoDoc === "RC")   page.drawText("X", { x: 186, y: yDoc,  size: 14 });
+      if (data.tipoDoc === "OTRO") page.drawText("X", { x: 290, y: yDoc,  size: 14 });
 
       // ── TIPO DOC REGRESO ──
       const yDocr = 267;
-      if (data.tipoDoc === "CC")   page.drawText("X", { x: 103, y: yDocr, size: 14, font });
-      if (data.tipoDoc === "TI")   page.drawText("X", { x: 141, y: yDocr, size: 14, font });
-      if (data.tipoDoc === "RC")   page.drawText("X", { x: 186, y: yDocr, size: 14, font });
-      if (data.tipoDoc === "OTRO") page.drawText("X", { x: 290, y: yDocr, size: 14, font });
+      if (data.tipoDoc === "CC")   page.drawText("X", { x: 103, y: yDocr, size: 14 });
+      if (data.tipoDoc === "TI")   page.drawText("X", { x: 141, y: yDocr, size: 14 });
+      if (data.tipoDoc === "RC")   page.drawText("X", { x: 186, y: yDocr, size: 14 });
+      if (data.tipoDoc === "OTRO") page.drawText("X", { x: 290, y: yDocr, size: 14 });
 
       const pdfBytes = await pdfDoc.save();
       const tempPdf  = await PDFDocument.load(pdfBytes);
